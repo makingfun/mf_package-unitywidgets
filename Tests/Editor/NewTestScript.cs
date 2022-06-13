@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Makingfun.UnityWidgets.Tests.Editor
+namespace Makingfun.UnityWidgets.Editor.Tests
 {
     public class NewTestScript
     {

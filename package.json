@@ -1,7 +1,7 @@
 {
     "name": "com.makingfun.unitywidgets",
     "version": "0.0.1-beta",
-    "displayName": "Making Fun Inc. - Unity Widgets",
+    "displayName": "Making Fun Inc. Unity Widgets",
     "description": "A package containing tools for a menu manager",
     "unity": "2022.4",
     "author": {
