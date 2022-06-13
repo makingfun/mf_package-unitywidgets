@@ -2,18 +2,11 @@ using UnityEngine;
 
 namespace Makingfun.UnityWidgets
 {
+    
     public class ToolTip : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        public Rigidbody2D body;
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        void Start() => Debug.Log("Making fun widget starting");
     }
 }
