@@ -5,7 +5,7 @@ namespace Makingfun.UnityWidgets
 {
     public class Timer
     {
-        public float duration { get; private set; }
+        public float duration { get; }
         public float remaining { get; private set; }
         public event Action Expired;
         
@@ -15,8 +15,8 @@ namespace Makingfun.UnityWidgets
         public Timer(TimeManager time, float duration)
         {
             this.duration = duration;
-            remaining = duration;
             this.time = time;
+            remaining = duration;
         }
 
         public void Start() => active = true;

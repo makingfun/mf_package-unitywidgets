@@ -6,11 +6,15 @@
 
         public ToolTipManager(TimeManager timeManager) => this.timeManager = timeManager;
 
-        public void ShowText(ToolTipUIBase uiBase, string message, float timeInSeconds = 0)
+        public static void ShowText(ToolTipUIBase uiBase, string message)
         {
             uiBase.SetMessage(message);
-            
-            var timer = new Timer(timeManager, timeInSeconds);
+            uiBase.Show();
+        }
+
+        public static void ShowText(ToolTipUIBase uiBase, string message, Timer timer)
+        {
+            uiBase.SetMessage(message);
             timer.Expired += uiBase.Show;
             timer.Start();
         }

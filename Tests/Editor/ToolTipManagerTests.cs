@@ -8,11 +8,7 @@ namespace Makingfun.UnityWidgets.Editor.Tests
         public void ShowText()
         {
             var uiBase = new MockUIBase();
-            var mockTime = new MockTimeManager {delta = 1f};
-            var tooltipManager = new ToolTipManager(mockTime);
-            
-            tooltipManager.ShowText(uiBase, string.Empty);
-            
+            ToolTipManager.ShowText(uiBase, string.Empty);
             Assert.IsTrue(uiBase.ShowWasCalled);
         }
 
@@ -21,15 +17,12 @@ namespace Makingfun.UnityWidgets.Editor.Tests
         {
             var uiBase = new MockUIBase();
             var mockTime = new MockTimeManager {delta = 1f};
-            var tooltipManager = new ToolTipManager(mockTime);
-            //
-            // var timer = new Timer(mockTime, 5);
-            // timer.Expired += uiBase.Show;
+            var timer = new Timer(mockTime, 5);
 
             //When
-            tooltipManager.ShowText(uiBase, string.Empty, 5);
+            ToolTipManager.ShowText(uiBase, string.Empty, timer);
             
-            // TimePasses(timer, 5);
+            TimePasses(timer, 5);
             
             Assert.IsTrue(uiBase.ShowWasCalled);
         }
