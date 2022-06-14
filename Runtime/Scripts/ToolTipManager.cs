@@ -1,18 +1,14 @@
 ﻿namespace Makingfun.UnityWidgets
 {
-    public class ToolTipManager
+    public static class ToolTipManager
     {
-        readonly TimeManager timeManager;
-
-        public ToolTipManager(TimeManager timeManager) => this.timeManager = timeManager;
-
         public static void ShowText(ToolTipUIBase uiBase, string message)
         {
             uiBase.SetMessage(message);
             uiBase.Show();
         }
 
-        public static void ShowText(ToolTipUIBase uiBase, string message, Timer timer)
+        public static void ScheduleShowText(ToolTipUIBase uiBase, string message, Timer timer)
         {
             uiBase.SetMessage(message);
             timer.Expired += uiBase.Show;
