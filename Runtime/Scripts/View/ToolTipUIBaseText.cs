@@ -8,12 +8,15 @@ namespace Makingfun.UnityWidgets
     {
         [SerializeField] Text messageText;
 
-        public void SetMessage(string message) => messageText.text = message;
-        
-        public void Show() => gameObject.SetActive(true);
-        public void ShowWithDirection(Direction direction)
+        public void Show(string message)
         {
-            
+            messageText.text = message;
+            gameObject.SetActive(true);
+        }
+
+        public void ShowWithDirection(string message, Direction direction)
+        {
+            throw new System.NotImplementedException();
         }
 
         void Awake() => Hide();

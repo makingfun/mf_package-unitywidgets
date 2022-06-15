@@ -5,29 +5,26 @@ namespace Makingfun.UnityWidgets
 {
     public class Timer
     {
-        public float duration { get; }
-        public float remaining { get; private set; }
+        public float Duration { get; }
+        public float Remaining { get; private set; }
         public event Action Expired;
-        
-        // public event Action Expired;
-
         
         bool active;
         readonly TimeManager time;
 
         public Timer(TimeManager time, float duration)
         {
-            this.duration = duration;
+            Duration = duration;
             this.time = time;
-            remaining = duration;
+            Remaining = duration;
         }
 
         public void Start() => active = true;
 
         public void Update()
         {            
-            remaining = Mathf.Max(remaining - time.delta, 0);
-            if (remaining == 0 && active)
+            Remaining = Mathf.Max(Remaining - time.delta, 0);
+            if (Remaining == 0 && active)
             {
                 active = false;
                 Expired?.Invoke();

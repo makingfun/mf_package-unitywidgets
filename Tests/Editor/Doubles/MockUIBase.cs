@@ -5,10 +5,8 @@
         public bool ShowWasCalled;
         public Direction DirectionCalled { get; private set; }
 
-        public void SetMessage(string message){ }
-
-        public void Show() => ShowWasCalled = true;
-        public void ShowWithDirection(Direction direction)
+        public void Show(string message) => ShowWasCalled = true;
+        public void ShowWithDirection(string message, Direction direction)
         {
             ShowWasCalled = true;
             DirectionCalled = direction;

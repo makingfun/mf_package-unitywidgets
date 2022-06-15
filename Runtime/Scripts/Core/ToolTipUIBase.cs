@@ -2,8 +2,8 @@
 {
     public interface ToolTipUIBase
     {
-        void SetMessage(string message);
-        void Show();
-        void ShowWithDirection(Direction direction);
+        void Show(string message);
+        
+        void ShowWithDirection(string message, Direction direction);
     }
 }

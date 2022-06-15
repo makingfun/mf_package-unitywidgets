@@ -9,10 +9,13 @@ namespace Makingfun.UnityWidgets
         
         [SerializeField] TextMeshProUGUI messageText;
 
-        public void SetMessage(string message) => messageText.text = message;
+        public void Show(string message)
+        {
+            messageText.text = message;
+            gameObject.SetActive(true);
+        }
 
-        public void Show() => gameObject.SetActive(true);
-        public void ShowWithDirection(Direction direction)
+        public void ShowWithDirection(string message, Direction direction)
         {
             throw new System.NotImplementedException();
         }
