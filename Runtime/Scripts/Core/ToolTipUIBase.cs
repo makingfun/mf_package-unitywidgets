@@ -4,5 +4,6 @@
     {
         void SetMessage(string message);
         void Show();
+        void ShowWithDirection(Direction direction);
     }
 }

@@ -11,7 +11,11 @@ namespace Makingfun.UnityWidgets
         public void SetMessage(string message) => messageText.text = message;
         
         public void Show() => gameObject.SetActive(true);
-        
+        public void ShowWithDirection(Direction direction)
+        {
+            
+        }
+
         void Awake() => Hide();
 
         void Hide() => gameObject.SetActive(false);

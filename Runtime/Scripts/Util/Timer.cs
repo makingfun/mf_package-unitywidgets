@@ -9,8 +9,11 @@ namespace Makingfun.UnityWidgets
         public float remaining { get; private set; }
         public event Action Expired;
         
+        // public event Action Expired;
+
+        
         bool active;
-        TimeManager time;
+        readonly TimeManager time;
 
         public Timer(TimeManager time, float duration)
         {

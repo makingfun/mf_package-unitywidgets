@@ -4,46 +4,58 @@ namespace Makingfun.UnityWidgets.Editor.Tests
 {
     public class ToolTipManagerTests
     {
-        MockUIBase uiBase;
+        MockUIBase uiBaseMock;
         
         [SetUp]
-        public void Setup() => uiBase = new MockUIBase();
+        public void Setup() => uiBaseMock = new MockUIBase();
 
         [Test]
-        public void ShowText()
+        public void ShowToolTip()
         {
-            uiBase = new MockUIBase();
-            ToolTipManager.ShowText(uiBase, string.Empty);
-            Assert.IsTrue(uiBase.ShowWasCalled);
+            ToolTipManager.ShowText(uiBaseMock, string.Empty);
+            Assert.IsTrue(uiBaseMock.ShowWasCalled);
         }
 
         [Test]
-        public void ShowTextAfterDelay()
+        public void ShowAfterDelay()
         {
-            uiBase = new MockUIBase();
             var mockTime = new MockTimeManager {delta = 1f};
             var timer = new Timer(mockTime, 5);
 
-            ToolTipManager.ScheduleShowText(uiBase, string.Empty, timer);
+            ToolTipManager.ScheduleShowText(uiBaseMock, string.Empty, timer);
             
             TimePasses(timer, 5);
             
-            Assert.IsTrue(uiBase.ShowWasCalled);
+            Assert.IsTrue(uiBaseMock.ShowWasCalled);
         }
 
         [Test]
-        public void NotShowTextIfDelayHasNotFinished()
+        public void NotShowIfDelayHasNotFinished()
         {
-            uiBase = new MockUIBase();
             var mockTime = new MockTimeManager {delta = 1f};
             const int expectedDuration = 5;
             var timer = new Timer(mockTime, expectedDuration);
 
-            ToolTipManager.ScheduleShowText(uiBase, string.Empty, timer);
+            ToolTipManager.ScheduleShowText(uiBaseMock, string.Empty, timer);
 
             TimePasses(timer, expectedDuration - 1);
             
-            Assert.IsFalse(uiBase.ShowWasCalled);
+            Assert.IsFalse(uiBaseMock.ShowWasCalled);
+        }
+
+        [Test]
+        public void ShowInDirectionRequested()
+        {
+            var mockTime = new MockTimeManager {delta = 1f};
+            const int expectedDuration = 1;
+            var timer = new Timer(mockTime, expectedDuration);
+            const Direction expectedDirection = Direction.Up;
+            
+            ToolTipManager.ScheduleShowText(uiBaseMock, string.Empty, timer, expectedDirection);
+            TimePasses(timer, expectedDuration);
+            
+            Assert.IsTrue(uiBaseMock.ShowWasCalled);
+            Assert.AreEqual(expectedDirection, uiBaseMock.DirectionCalled);
         }
 
         static void TimePasses(Timer timer, float ticks)

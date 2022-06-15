@@ -14,5 +14,12 @@
             timer.Expired += uiBase.Show;
             timer.Start();
         }
+
+        public static void ScheduleShowText(ToolTipUIBase uiBase, string message, Timer timer, Direction direction)
+        {
+            uiBase.SetMessage(message);
+            timer.Expired += () => uiBase.ShowWithDirection(direction);
+            timer.Start();
+        }
     }
 }
