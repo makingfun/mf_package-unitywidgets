@@ -2,6 +2,6 @@
 {
     public interface TimeManager
     {
-        float delta { get; }
+        float Delta { get; }
     }
 }

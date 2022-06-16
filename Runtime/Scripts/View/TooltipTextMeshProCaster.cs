@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Makingfun.UnityWidgets
 {
-    public class ToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class TooltipTextCaster : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] string message;
         [SerializeField] ToolTipUIBaseTextMeshPro toolTipUI;

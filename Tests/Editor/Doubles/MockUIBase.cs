@@ -11,5 +11,7 @@
             ShowWasCalled = true;
             DirectionCalled = direction;
         }
+
+        public void Hide(){ }
     }
 }

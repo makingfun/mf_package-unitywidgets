@@ -2,6 +2,6 @@
 {
     public class MockTimeManager : TimeManager
     {
-        public float delta { get; set; }
+        public float Delta { get; set; }
     }
 }

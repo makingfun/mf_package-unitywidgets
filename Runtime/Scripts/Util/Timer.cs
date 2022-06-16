@@ -23,7 +23,7 @@ namespace Makingfun.UnityWidgets
 
         public void Update()
         {            
-            Remaining = Mathf.Max(Remaining - time.delta, 0);
+            Remaining = Mathf.Max(Remaining - time.Delta, 0);
             if (Remaining == 0 && active)
             {
                 active = false;

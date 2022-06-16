@@ -5,5 +5,7 @@
         void Show(string message);
         
         void ShowWithDirection(string message, Direction direction);
+
+        void Hide();
     }
 }

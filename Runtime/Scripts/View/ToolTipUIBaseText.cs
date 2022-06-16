@@ -19,8 +19,10 @@ namespace Makingfun.UnityWidgets
             throw new System.NotImplementedException();
         }
 
+        public void Hide() => gameObject.SetActive(false);
+        
         void Awake() => Hide();
 
-        void Hide() => gameObject.SetActive(false);
+        
     }
 }

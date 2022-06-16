@@ -19,7 +19,7 @@ namespace Makingfun.UnityWidgets.Editor.Tests
         [Test]
         public void ShowAfterDelay()
         {
-            var mockTime = new MockTimeManager {delta = 1f};
+            var mockTime = new MockTimeManager {Delta = 1f};
             var timer = new Timer(mockTime, 5);
 
             ToolTipManager.ScheduleShowText(uiBaseMock, string.Empty, timer);
@@ -32,7 +32,7 @@ namespace Makingfun.UnityWidgets.Editor.Tests
         [Test]
         public void NotShowIfDelayHasNotFinished()
         {
-            var mockTime = new MockTimeManager {delta = 1f};
+            var mockTime = new MockTimeManager {Delta = 1f};
             const int expectedDuration = 5;
             var timer = new Timer(mockTime, expectedDuration);
 
@@ -46,7 +46,7 @@ namespace Makingfun.UnityWidgets.Editor.Tests
         [Test]
         public void ShowInDirectionRequested()
         {
-            var mockTime = new MockTimeManager {delta = 1f};
+            var mockTime = new MockTimeManager {Delta = 1f};
             const int expectedDuration = 1;
             var timer = new Timer(mockTime, expectedDuration);
             const Direction expectedDirection = Direction.Up;
