@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 1261604842}
   - component: {fileID: 1261604844}
   - component: {fileID: 1261604843}
+  - component: {fileID: 1261604845}
   m_Layer: 5
   m_Name: Button1
   m_TagString: Untagged
@@ -433,7 +434,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -632, y: -584}
+  m_AnchoredPosition: {x: -167, y: -586}
   m_SizeDelta: {x: -1738.1206, y: -1330.1427}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1261604843
@@ -474,6 +475,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261604841}
   m_CullTransparentMesh: 1
+--- !u!114 &1261604845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261604841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf38b45b43a64bb8aac33486b177880a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipPrefab: {fileID: 24731875556774567, guid: 7874c9b7908a30040b2b2c43e2c2277b, type: 3}
+  title: Titulo de prueba
+  message: mensaje de prueba
 --- !u!1 &1806717032
 GameObject:
   m_ObjectHideFlags: 0

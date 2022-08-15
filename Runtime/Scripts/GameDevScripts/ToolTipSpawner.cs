@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace unity_widgets.Runtime.Scripts.GameDevScripts
+namespace Makingfun.UnityWidgets.Scripts.GameDevScripts
 {
     /// <summary>
     /// Abstract base class that handles the spawning of a tooltip prefab at the
