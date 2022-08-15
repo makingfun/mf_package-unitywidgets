@@ -54,6 +54,8 @@ namespace Makingfun.UnityWidgets.Scripts.GameDevScripts
             }
         }
 
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => ClearTooltip();
+
         void PositionTooltip()
         {
             // Required to ensure corners are updated by positioning elements.
@@ -74,6 +76,12 @@ namespace Makingfun.UnityWidgets.Scripts.GameDevScripts
             tooltip.transform.position = slotCorners[slotCorner] - tooltipCorners[tooltipCorner] + tooltip.transform.position;
         }
 
+        void ClearTooltip()
+        {
+            if (tooltip) 
+                Destroy(tooltip.gameObject);
+        }
+
         static int GetCornerIndex(bool below, bool right)
         {
             return below switch
@@ -83,14 +91,6 @@ namespace Makingfun.UnityWidgets.Scripts.GameDevScripts
                 false when true => 2,
                 _ => 3
             };
-        }
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => ClearTooltip();
-
-        void ClearTooltip()
-        {
-            if (tooltip) 
-                Destroy(tooltip.gameObject);
         }
     }
 }

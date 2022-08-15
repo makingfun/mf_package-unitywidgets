@@ -4,7 +4,6 @@ namespace Makingfun.UnityWidgets.Scripts.GameDevScripts
 {
     public class ExampleTooltipSpawner : TooltipSpawner
     {
-        
         [SerializeField] string title;
         [SerializeField] string message;
         
