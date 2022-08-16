@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Makingfun.UnityWidgets.Scripts.Core;
+using UnityEngine;
 
-namespace Makingfun.UnityWidgets.Scripts.GameDevScripts
+namespace Makingfun.UnityWidgets.Scripts.View
 {
     public class ExampleTooltipSpawner : TooltipSpawner
     {

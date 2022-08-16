@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Makingfun.UnityWidgets
+namespace Makingfun.UnityWidgets.Scripts.View
 {
     /// <summary>
     /// Root of the tooltip prefab to expose properties to other classes.

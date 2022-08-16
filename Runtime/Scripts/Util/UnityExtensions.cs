@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using Makingfun.UnityWidgets.Scripts.Core;
 using UnityEngine;
 
-namespace Makingfun.UnityWidgets
+namespace Makingfun.UnityWidgets.Scripts.Util
 {
     public static class UnityExtensions
     {
