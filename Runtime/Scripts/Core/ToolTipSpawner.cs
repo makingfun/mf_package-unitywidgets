@@ -109,6 +109,7 @@ namespace Makingfun.UnityWidgets.Scripts.Core
                 Direction.Down => new Vector3(position.x, position.y + rectangle.y),
                 Direction.Left => new Vector3(position.x + rectangle.x, position.y),
                 Direction.Right => new Vector3(position.x - rectangle.x, position.y),
+                Direction.Default => new Vector3(position.x, position.y), 
                 _ => new Vector3(position.x, position.y)
             };
 
