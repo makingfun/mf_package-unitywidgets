@@ -63,11 +63,11 @@ namespace Makingfun.UnityWidgets.Scripts.Core
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => ClearTooltip();
 
-        void PositionTooltip() => tooltip.transform.position = PositionIsDefault() ?
+        void PositionTooltip() => tooltip.transform.position = IsPositionIsDefault() ?
             toolTipPositioner.GetRelativePosition() : 
             toolTipPositioner.GetPositionFromDirection(tooltipDirection);
 
-        bool PositionIsDefault() => tooltipDirection == Direction.Default;
+        bool IsPositionIsDefault() => tooltipDirection == Direction.Default;
 
         void ClearTooltip()
         {

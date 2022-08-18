@@ -9,9 +9,7 @@ namespace Makingfun.UnityWidgets.Scripts.Core
         readonly Vector3 casterPosition;
         readonly Vector3[] casterCorners = new Vector3[4];
         readonly RectTransform casterRectTransform;
-        
         readonly Vector3[] tooltipCorners = new Vector3[4];
-
 
         public ToolTipPositioner(GameObject caster)
         {
@@ -40,35 +38,35 @@ namespace Makingfun.UnityWidgets.Scripts.Core
         {
             Canvas.ForceUpdateCanvases();
             tooltipRectTransform.transform.position = casterRectTransform.position;
-            tooltipRectTransform.anchoredPosition = UpdateAnchoredPosition(tooltipDirection, 
-                tooltipRectTransform.anchoredPosition);
+            tooltipRectTransform.anchoredPosition = UpdateAnchoredTo(tooltipDirection);
             return tooltipRectTransform.transform.position;
         }
 
-        Vector2 UpdateAnchoredPosition(Direction tooltipDirection, Vector2 tooltipAnchoredPosition)
+        Vector2 UpdateAnchoredTo(Direction tooltipDirection)
         {
             var movingDeltaY = GetMovingDeltaY(tooltipRectTransform.rect, casterRectTransform.rect);
             var movingDeltaX = GetMovingDeltaX(tooltipRectTransform.rect, casterRectTransform.rect);
+            var anchoredPosition = tooltipRectTransform.anchoredPosition;
             
             return tooltipDirection switch
             {
-                Direction.Up => new Vector2(tooltipAnchoredPosition.x, tooltipAnchoredPosition.y + movingDeltaY),
-                Direction.Down => new Vector2(tooltipAnchoredPosition.x, tooltipAnchoredPosition.y - movingDeltaY),
-                Direction.Left => new Vector2(tooltipAnchoredPosition.x - movingDeltaX, tooltipAnchoredPosition.y),
-                Direction.Right => new Vector2(tooltipAnchoredPosition.x + movingDeltaX, tooltipAnchoredPosition.y),
-                _ => tooltipAnchoredPosition
+                Direction.Up => new Vector2(anchoredPosition.x, anchoredPosition.y + movingDeltaY),
+                Direction.Down => new Vector2(anchoredPosition.x, anchoredPosition.y - movingDeltaY),
+                Direction.Left => new Vector2(anchoredPosition.x - movingDeltaX, anchoredPosition.y),
+                Direction.Right => new Vector2(anchoredPosition.x + movingDeltaX, anchoredPosition.y),
+                _ => anchoredPosition
             };
         }
-
-        bool IsPassHalfScreen() => casterPosition.x < Screen.width / 2;
-
-        bool IsBelowHalfScreen() => casterPosition.y > Screen.height / 2;
 
         void SetCorners()
         {
             tooltipRectTransform.GetWorldCorners(tooltipCorners);
             casterRectTransform.GetWorldCorners(casterCorners);
         }
+
+        bool IsPassHalfScreen() => casterPosition.x < Screen.width / 2;
+
+        bool IsBelowHalfScreen() => casterPosition.y > Screen.height / 2;
 
         static float GetMovingDeltaX(Rect tooltipRectangle, Rect casterRectangle) => 
             tooltipRectangle.width / 2 + casterRectangle.width / 2;
