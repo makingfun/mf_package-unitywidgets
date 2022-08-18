@@ -20,7 +20,8 @@ namespace Makingfun.UnityWidgets.Scripts.Core
         [SerializeField] Direction tooltipPosition = Direction.Default;
 
         GameObject tooltip;
-
+        ToolTipPositioner toolTipPositioner;
+        
         /// <summary>
         /// Called when it is time to update the information on the tooltip
         /// prefab.
@@ -35,6 +36,8 @@ namespace Makingfun.UnityWidgets.Scripts.Core
         /// </summary>
         protected abstract bool CanCreateTooltip();
 
+        void Start() => toolTipPositioner = new ToolTipPositioner(gameObject);
+
         void OnDestroy() => ClearTooltip();
 
         void OnDisable() => ClearTooltip();
@@ -46,8 +49,11 @@ namespace Makingfun.UnityWidgets.Scripts.Core
             if (tooltip && !CanCreateTooltip()) 
                 ClearTooltip();
 
-            if (!tooltip && CanCreateTooltip()) 
+            if (!tooltip && CanCreateTooltip())
+            {
                 tooltip = Instantiate(tooltipPrefab, parentCanvas.transform);
+                toolTipPositioner.SetTooltip(tooltip);
+            }
 
             if (tooltip)
             {
@@ -61,28 +67,9 @@ namespace Makingfun.UnityWidgets.Scripts.Core
         void PositionTooltip()
         {
             if (tooltipPosition == Direction.Default)
-                PickPosition();
+                tooltip.transform.position = toolTipPositioner.GetRelativePosition();
             else
                 ForcePosition(tooltipPosition);
-        }
-
-        void PickPosition()
-        {
-            Canvas.ForceUpdateCanvases();
-
-            var tooltipCorners = new Vector3[4];
-            tooltip.GetComponent<RectTransform>().GetWorldCorners(tooltipCorners);
-            var slotCorners = new Vector3[4];
-            GetComponent<RectTransform>().GetWorldCorners(slotCorners);
-
-            var position = transform.position;
-            var below = position.y > Screen.height / 2;
-            var right = position.x < Screen.width / 2;
-            var slotCorner = GetCornerIndex(below, right);
-            var tooltipCorner = GetCornerIndex(!below, !right);
-
-            tooltip.transform.position = slotCorners[slotCorner] - tooltipCorners[tooltipCorner] + 
-                                         tooltip.transform.position;
         }
 
         void ForcePosition(Direction direction)
@@ -95,7 +82,6 @@ namespace Makingfun.UnityWidgets.Scripts.Core
             var casterRectangle = GetComponent<RectTransform>().rect;
             var movingDeltaY = tooltipRectangle.height / 2 + casterRectangle.height / 2;
             var movingDeltaX = tooltipRectangle.width / 2 + casterRectangle.width / 2;
-            
             var anchoredPosition = tooltipRectTransform.anchoredPosition;
         
             switch (direction)
@@ -126,14 +112,5 @@ namespace Makingfun.UnityWidgets.Scripts.Core
             if (tooltip) 
                 Destroy(tooltip.gameObject);
         }
-
-        static int GetCornerIndex(bool below, bool right) =>
-            below switch
-            {
-                true when !right => 0,
-                false when !right => 1,
-                false when true => 2,
-                _ => 3
-            };
     }
 }

@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipPrefab: {fileID: 24731875556774567, guid: 7874c9b7908a30040b2b2c43e2c2277b, type: 3}
-  tooltipPosition: 1
+  tooltipPosition: 0
   title: Titulo de prueba
   message: mensaje de prueba
 --- !u!1 &1806717032
