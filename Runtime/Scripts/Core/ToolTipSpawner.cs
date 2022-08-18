@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Makingfun.UnityWidgets.Scripts.Core
@@ -87,13 +88,37 @@ namespace Makingfun.UnityWidgets.Scripts.Core
         void ForcePosition(Direction direction)
         {
             Canvas.ForceUpdateCanvases();
-            var tooltipRectangle = tooltip.GetComponent<RectTransform>().rect;
-            var casterPosition = transform.position;
+            tooltip.transform.position = transform.position;
             
-            tooltip.transform.position = GetPositionFrom(direction, casterPosition, tooltipRectangle);
+            var tooltipRectTransform = tooltip.GetComponent<RectTransform>();
+            var tooltipRectangle = tooltipRectTransform.rect;
+            var casterRectangle = GetComponent<RectTransform>().rect;
+            var movingDeltaY = tooltipRectangle.height / 2 + casterRectangle.height / 2;
+            var movingDeltaX = tooltipRectangle.width / 2 + casterRectangle.width / 2;
             
-            Debug.Log($"Tooltip position {tooltip.transform.position.y}");
-
+            var anchoredPosition = tooltipRectTransform.anchoredPosition;
+        
+            switch (direction)
+            {
+                case Direction.Default:
+                    break;
+                case Direction.Up:
+                    tooltipRectTransform.anchoredPosition = new Vector2(anchoredPosition.x, 
+                        anchoredPosition.y + movingDeltaY);
+                    break;
+                case Direction.Down:
+                    tooltipRectTransform.anchoredPosition = new Vector2(anchoredPosition.x,
+                        anchoredPosition.y - movingDeltaY);
+                    break;
+                case Direction.Left:
+                    tooltipRectTransform.anchoredPosition = new Vector2(anchoredPosition.x - movingDeltaX, anchoredPosition.y);
+                    break;
+                case Direction.Right:
+                    tooltipRectTransform.anchoredPosition = new Vector2(anchoredPosition.x + movingDeltaX, anchoredPosition.y);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+            }
         }
 
         void ClearTooltip()
@@ -101,17 +126,6 @@ namespace Makingfun.UnityWidgets.Scripts.Core
             if (tooltip) 
                 Destroy(tooltip.gameObject);
         }
-
-        static Vector3 GetPositionFrom(Direction direction, Vector3 position, Rect rectangle) =>
-            direction switch
-            {
-                Direction.Up => new Vector3(position.x, position.y - rectangle.y),
-                Direction.Down => new Vector3(position.x, position.y + rectangle.y),
-                Direction.Left => new Vector3(position.x + rectangle.x, position.y),
-                Direction.Right => new Vector3(position.x - rectangle.x, position.y),
-                Direction.Default => new Vector3(position.x, position.y), 
-                _ => new Vector3(position.x, position.y)
-            };
 
         static int GetCornerIndex(bool below, bool right) =>
             below switch

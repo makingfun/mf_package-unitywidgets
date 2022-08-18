@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Makingfun.UnityWidgets.Scripts.View
 {
-    public class ExampleTooltipSpawner : TooltipSpawner
+    public class DefaultTooltipSpawner : TooltipSpawner
     {
         [SerializeField] string title;
         [SerializeField] string message;
