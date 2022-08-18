@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Makingfun.UnityWidgets.Scripts.Core
@@ -17,7 +16,7 @@ namespace Makingfun.UnityWidgets.Scripts.Core
         [SerializeField] GameObject tooltipPrefab;
 
         [Tooltip("Force a position to spawn the tooltip prefab.")]
-        [SerializeField] Direction tooltipPosition = Direction.Default;
+        [SerializeField] Direction tooltipDirection = Direction.Default;
 
         GameObject tooltip;
         ToolTipPositioner toolTipPositioner;
@@ -64,48 +63,11 @@ namespace Makingfun.UnityWidgets.Scripts.Core
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => ClearTooltip();
 
-        void PositionTooltip()
-        {
-            if (tooltipPosition == Direction.Default)
-                tooltip.transform.position = toolTipPositioner.GetRelativePosition();
-            else
-                ForcePosition(tooltipPosition);
-        }
+        void PositionTooltip() => tooltip.transform.position = PositionIsDefault() ?
+            toolTipPositioner.GetRelativePosition() : 
+            toolTipPositioner.GetPositionFromDirection(tooltipDirection);
 
-        void ForcePosition(Direction direction)
-        {
-            Canvas.ForceUpdateCanvases();
-            tooltip.transform.position = transform.position;
-            
-            var tooltipRectTransform = tooltip.GetComponent<RectTransform>();
-            var tooltipRectangle = tooltipRectTransform.rect;
-            var casterRectangle = GetComponent<RectTransform>().rect;
-            var movingDeltaY = tooltipRectangle.height / 2 + casterRectangle.height / 2;
-            var movingDeltaX = tooltipRectangle.width / 2 + casterRectangle.width / 2;
-            var anchoredPosition = tooltipRectTransform.anchoredPosition;
-        
-            switch (direction)
-            {
-                case Direction.Default:
-                    break;
-                case Direction.Up:
-                    tooltipRectTransform.anchoredPosition = new Vector2(anchoredPosition.x, 
-                        anchoredPosition.y + movingDeltaY);
-                    break;
-                case Direction.Down:
-                    tooltipRectTransform.anchoredPosition = new Vector2(anchoredPosition.x,
-                        anchoredPosition.y - movingDeltaY);
-                    break;
-                case Direction.Left:
-                    tooltipRectTransform.anchoredPosition = new Vector2(anchoredPosition.x - movingDeltaX, anchoredPosition.y);
-                    break;
-                case Direction.Right:
-                    tooltipRectTransform.anchoredPosition = new Vector2(anchoredPosition.x + movingDeltaX, anchoredPosition.y);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
-            }
-        }
+        bool PositionIsDefault() => tooltipDirection == Direction.Default;
 
         void ClearTooltip()
         {
